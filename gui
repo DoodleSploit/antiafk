@@ -1,0 +1,71 @@
+local AntiAFK = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local AFKButton = Instance.new("ImageButton")
+local Detector = Instance.new("TextLabel")
+local IsAFK = Instance.new("IntValue")
+
+--Properties:
+
+AntiAFK.Name = "AntiAFK"
+AntiAFK.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+AntiAFK.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+IsAFK.Name = "IsAFK"
+IsAFK.Parent = MainFrame
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = AntiAFK
+MainFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.new(0.663030326, 0, 0.43857494, 0)
+MainFrame.Size = UDim2.new(0, 237, 0, 100)
+
+AFKButton.Name = "AFKButton"
+AFKButton.Parent = MainFrame
+AFKButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+AFKButton.BackgroundTransparency = 1.000
+AFKButton.BorderSizePixel = 0
+AFKButton.Position = UDim2.new(0.0276816618, 0, 0.339999974, 0)
+AFKButton.Size = UDim2.new(0, 32, 0, 31)
+AFKButton.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+
+Detector.Name = "Detector"
+Detector.Parent = MainFrame
+Detector.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Detector.BackgroundTransparency = 1.000
+Detector.BorderSizePixel = 0
+Detector.Position = UDim2.new(0.223628685, 0, 0.239999995, 0)
+Detector.Size = UDim2.new(0, 184, 0, 50)
+Detector.Font = Enum.Font.SourceSansBold
+Detector.Text = "Not AFK"
+Detector.TextColor3 = Color3.fromRGB(255, 255, 255)
+Detector.TextScaled = true
+Detector.TextSize = 14.000
+Detector.TextWrapped = true
+--Scripts
+if AFKButton.MouseButton1Down then
+	IsAFK.Value = "afk"
+else
+	IsAFK.Value = "not afk"
+end
+
+if IsAFK.Value == "afk" then
+	AFKButton.Image = 1183338677
+else
+	AFKButton.Image = 150481814
+end
+
+if IsAFK.Value == "afk" then
+	Detector.Text = "AFK Enabled!"
+else
+	Detector.Text = "AFK Disabled"
+end
+--AntiAFK Script
+if AFKButton.MouseButton1Down then
+	_G.afk = true
+	while _G.afk do
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(1, 0, 0))
+		wait(0.1)
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(-1, 0, 0))
+	end
+end
