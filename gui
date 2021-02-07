@@ -41,3 +41,16 @@ if AFKButton.MouseButton1Down then
 		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(-1, 0, 0))
 	end
 end
+--Send Notification
+local function callback(Text)
+end
+
+local NotificationBindable = Instance.new("BindableFunction")
+NotificationBindable.OnInvoke = callback
+
+game.StarterGui:SetCore("SendNotification", {
+    Title = "AFK";
+    Text = "Thanks for using my script! Made by itsDoodle#9089";
+    Duration = "5";
+    Callback = NotificationBindable;
+})
